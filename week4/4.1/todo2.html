@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To do App</title>
+</head>
+
+<body>
+    <div>
+        <input id="title" type="text" placeholder="Title"><br><br>
+        <input id="description" type="text" placeholder="Description"><br><br>
+    </div>
+
+    <div id="container">
+
+        <!-- <div id="title">addad
+        </div>
+        <div id="description">daadda
+        </div>
+        <button>Mark as Done</button> -->
+
+    </div>
+
+
+    <script>
+        function createChild(titleVal, descriptionVal, completedVal) {
+            const title = document.querySelector("#title");
+            const description = document.querySelector("#description");
+            const container = document.querySelector('#container');
+
+            const parent = document.createElement('div');
+            const titlediv = document.createElement("div");
+            const descdiv = document.createElement("div");
+            const completedDiv = document.createElement('div')
+            const done = document.createElement("button");
+
+            titlediv.innerHTML = titleVal;
+            descdiv.innerHTML = descriptionVal;
+            completedDiv.innerHTML = "Completed: "+ completedVal;
+            done.innerHTML = "Mark as Done"
+
+            parent.appendChild(titlediv);
+            parent.appendChild(descdiv);
+            parent.appendChild(completedDiv);
+            parent.appendChild(done);
+
+            container.appendChild(parent)
+
+            done.addEventListener("click", () => {
+                done.innerHTML = "Job Done"
+            }
+            )
+
+        }
+
+
+        //update DOM according to state
+        function updateDomAcctoState(state) {
+            const container = document.querySelector('#container');
+            container.innerHTML = "";
+            for (let i = 0; i < state.length; i++) {
+                const child = createChild(state[i].title, state[i].description, state[i].completed);
+                container.append(child)
+            }
+        }
+
+        window.setInterval( async ()=>{
+            const res= await fetch("https://sum-server.100xdevs.com/todos")
+            const data = await res.json();
+            updateDomAcctoState(data.todos)
+        }, 5000)
+
+    </script>
+</body>
+
+</html>

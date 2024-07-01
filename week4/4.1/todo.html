@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To do App</title>
+</head>
+
+<body>
+    <div>
+        <input id="title" type="text" placeholder="Title"><br><br>
+        <input id="description" type="text" placeholder="Description"><br><br>
+
+        <button onclick="addTodo()">Add todo</button>
+    </div>
+
+    <div id="container">
+
+        <!-- <div id="title">addad
+        </div>
+        <div id="description">daadda
+        </div>
+        <button>Mark as Done</button> -->
+
+    </div>
+
+
+    <script>
+        function addTodo() {
+            const title = document.querySelector("#title");
+            const description = document.querySelector("#description");
+            const container = document.querySelector('#container');
+
+            const titlediv = document.createElement("div");
+            const descdiv = document.createElement("div");
+            const done = document.createElement("button");
+
+            titlediv.innerHTML = title.value;
+            descdiv.innerHTML = description.value;
+            done.innerHTML = "Mark as Done"
+
+            container.appendChild(titlediv);
+            container.appendChild(descdiv);
+            container.appendChild(done);
+
+            done.addEventListener("click", () => {
+                done.innerHTML = "Job Done"
+            }
+            )
+        } 
+
+        
+    </script>
+</body>
+
+</html>
